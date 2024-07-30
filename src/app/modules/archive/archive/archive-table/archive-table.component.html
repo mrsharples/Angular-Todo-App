@@ -1,0 +1,22 @@
+<table *ngIf="archive.length > 0">
+    <thead>
+        <tr>
+            <th>Created</th>
+            <th id="task">Task</th>
+            <th>Due</th>
+            <th>Completed</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let todo of archive">
+            <td>{{ todo.dateCreated | date }}</td>
+            <td>{{ todo.task }}</td>
+            <td>{{ todo.dateDue | date }}</td>
+            <td>{{ todo.dateCompleted | date }}</td>
+            <td align="center"><button (click)="deleteTodoFromArchive(todo)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<h4 *ngIf="archive.length === 0">No archived tasks.</h4>

@@ -1,0 +1,48 @@
+table {
+    width: 100%;
+
+    thead {
+        th {
+            border-bottom: 2px solid #023149;
+            text-align: center;
+
+            &#task {
+                width: 50%;
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            td {
+                text-align: center;
+
+                button {
+                    padding: 0.5rem;
+                    border-radius: 3px;
+                    cursor: pointer;
+                    border: 1px solid #023149;
+                    background-color: #ffffff;
+            
+                    &:hover {
+                        background-color: #023149;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+.overdue {
+    color: red;
+}
+
+h4 {
+    text-align: center;
+}
+

@@ -1,0 +1,18 @@
+footer {
+    position: fixed;
+    bottom: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .wrapper {
+
+        p {
+            text-align: center;
+            color: #023149;
+            font-style: italic;
+        }
+
+    }
+    
+}

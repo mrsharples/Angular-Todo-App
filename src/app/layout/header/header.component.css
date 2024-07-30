@@ -1,0 +1,30 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    border-bottom: 1px solid #023149;
+
+    padding: 0.5rem;
+
+    box-sizing: border-box;
+    
+}
+
+a {
+    text-decoration: none;
+    font-weight: 300;
+    color: #023149;
+    margin-left: 1rem;
+    
+    &.active {
+        font-weight: 900;
+        color: #023149;
+    }
+}
+
+.logo {
+    height: 100%;
+    object-fit: contain;
+    height: 2rem;
+    margin-right: auto;
+}

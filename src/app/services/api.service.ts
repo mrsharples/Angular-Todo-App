@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Options } from './../../types';
-import { ITodo } from './../../../../server/interfaces/ITodo';
+import { ITodo } from '../../../../server/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class ApiService {
     return this.HttpClient.get<T>(url, options) as Observable<T>;
   }
 
-  post<T>(url: string, body: {task: string, dateDue: string}, options: Options): Observable<T> {
+  post<T>(url: string, body: {task: string, dateDue: string, dateCreated?: string}, options: Options): Observable<T> {
     return this.HttpClient.post<T>(url, body, options) as Observable<T>;
   }
 

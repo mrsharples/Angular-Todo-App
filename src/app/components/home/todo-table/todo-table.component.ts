@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ITodo } from './../../../../server/interfaces/ITodo';
+import { ITodo } from '../../../../../../server/interfaces/interfaces';
 import { CommonModule } from '@angular/common';
 
-@Component({
+@Component({ 
   selector: 'app-todo-table',
   standalone: true,
   imports: [CommonModule],
@@ -13,7 +13,7 @@ export class TodoTableComponent {
 
   @Input() todos: ITodo[] = [];
   @Output() changed = new EventEmitter<ITodo>();
-  @Output() deleted = new EventEmitter<ITodo>();
+  @Output() archived = new EventEmitter<ITodo>();
 
   isOverdue(dateDue: Date) {
     let todaysDate = new Date();
@@ -29,7 +29,7 @@ export class TodoTableComponent {
   }
 
   deleteTodo(todo: ITodo) {
-    this.deleted.emit(todo);
+    this.archived.emit(todo);
   }
 
 }

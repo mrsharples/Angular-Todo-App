@@ -1,15 +1,3 @@
-<div class="container">
-  <h1>Todos</h1>
-
-  <app-todo-table 
-    [todos]="allTodos"
-    (changed)="updateTodo($event)"
-    (deleted)="deleteTodo($event)"
-  ></app-todo-table>
-
-  <form name="newTodoForm" (submit)="createNewTodo()">
-    <input id="taskInput" [(ngModel)]="newTodoTask" placeholder="Enter a task" name="newTodoTask" type="text" required>
-    <input [(ngModel)]="newTodoDate" type="date" name="newTodoDueDate" required>
-    <button type="submit">Create</button>
-  </form>
-</div>
+<app-header></app-header>
+<router-outlet>
+<app-footer></app-footer>

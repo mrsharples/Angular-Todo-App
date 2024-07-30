@@ -4,8 +4,8 @@
             <th>Due</th>
             <th id="task">Task</th>
             <th>Created</th>
-            <th>Completed</th>
-            <th>Remove</th>
+            <th>Completed?</th>
+            <th>Archive</th>
         </tr>
     </thead>
     <tbody>
@@ -14,7 +14,7 @@
             <td [ngClass]="{done: todo.done}">{{ todo.task }}</td>
             <td>{{ todo.createdAt | date }}</td>
             <td align="center"><input type="checkbox" (change)="toggleCompletedStatus(todo)" [checked]="todo.done"></td>
-            <td align="center"><button (click)="deleteTodo(todo)">Delete</button></td>
+            <td align="center"><button (click)="deleteTodo(todo)">Archive</button></td>
         </tr>
     </tbody>
 </table>

@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>Todos</h1>
+  
+    <app-todo-table 
+      [todos]="allTodos"
+      (changed)="updateTodo($event)"
+      (archived)="archiveTodo($event)"
+    ></app-todo-table> 
+ 
+    <h4 *ngIf="showForm === false" (click)="showForm = true">ADD TASK</h4>
+  
+    <form *ngIf="showForm === true" #newTodoForm="ngForm" (submit)="createNewTodo()">
+      <input 
+        id="taskInput" 
+        [(ngModel)]="newTodoTask" 
+        placeholder="Enter a task" 
+        name="newTodoTask" 
+        type="text" 
+        required>
+      <input 
+        [(ngModel)]="newTodoDate" 
+        type="date" 
+        name="newTodoDueDate" 
+        required>
+      <button 
+        type="submit"
+      >Create</button>
+      <button 
+        type="reset" 
+        (click)="handleFormClose()"
+      >Cancel</button>
+    </form>
+  </div>

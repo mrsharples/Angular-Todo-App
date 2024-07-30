@@ -1,0 +1,7 @@
+<div class="container">
+    <h1>Archive</h1>
+    <app-archive-table
+        [archive]="archivedTodos"
+        (deleted)="deleteTodo($event)"
+    ></app-archive-table>
+</div>
