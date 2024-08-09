@@ -30,23 +30,19 @@ export class HomeComponent implements OnInit {
   fetchTodos() {
     this.todosService.getTodos()
       .pipe(
-        map(response => response.data)
+        map(response => response.data),
+        map(data => {
+          data.sort(function(a: ITodo, b: ITodo) { 
+            const date1 = new Date(a.dateDue).valueOf()
+            const date2 = new Date(b.dateDue).valueOf()
+            return date1 - date2;
+          })
+          return data;
+          }
+        )
       )
       .subscribe(
-        {
-          next: (data: ITodo[]) => {
-            data.sort(function(a, b) { 
-              const date1 = new Date(a.dateDue).valueOf()
-              const date2 = new Date(b.dateDue).valueOf()
-              return date1 - date2;
-            })
-            this.allTodos = data;
-            console.log(this.allTodos);
-          },
-          error: (err) => {
-            console.log(err)
-          }
-        }
+          data => this.allTodos = data
       );
   }
 
@@ -57,62 +53,43 @@ export class HomeComponent implements OnInit {
     }
 
     this.todosService.createTodo(todoPayload)
-      .subscribe({
-        next: (result) => {
-          this.fetchTodos();
-          console.log(result)
-          this.newTodoTask = '';
-          this.newTodoDate = '';
-          this.showForm = false;
-        },
-        error: (err) => {
-          console.log(err)
-        }
+    .pipe(
+      map(response => {
+        console.log(response.message)
       })
+    )
+    .subscribe(
+      () => {
+        this.fetchTodos();
+        this.newTodoTask = '';
+        this.newTodoDate = '';
+        this.showForm = false;
+      }
+    )
   }
 
   updateTodo(event: ITodo) {
     this.todosService.updateCompletedStatus(event)
-    .pipe(
-      map(response => {
-        console.log(response.data)
-        return response.message
-      })
+    .subscribe(
+      result => console.log(result.message)
     )
-    .subscribe({
-      next: result => {
-        console.log(result)
-      }
-    })
   }
 
-  archiveTodo(event: ITodo) {
+  archiveTodo({ id, task, createdAt, dateDue } : ITodo ) {
     const payload = {
-      task: event.task,
-      dateCreated: event.createdAt.toLocaleString(),
-      dateDue: event.dateDue.toLocaleString()
+      task,
+      dateCreated: createdAt.toLocaleString(),
+      dateDue: dateDue.toLocaleString()
     }
-    console.log(payload)
     this.archiveService.createTodo(payload)
-    .pipe(
-      map(response => response.message)
+    .subscribe(
+      result => console.log(result.message)
     )
-    .subscribe({
-      next: result => {
-        console.log(result);
-      }
-    })
 
-    this.todosService.deleteTodo(event)
-    .pipe(
-      map(response => response.message)
+    this.todosService.deleteTodo(id)
+    .subscribe(
+      () => this.fetchTodos()
     )
-    .subscribe({
-      next: result => {
-        console.log(result);
-        this.fetchTodos();
-      }
-    })
     
   }
 

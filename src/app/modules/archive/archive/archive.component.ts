@@ -33,7 +33,6 @@ export class ArchiveComponent implements OnInit {
               return date1 - date2;
             })
             this.archivedTodos = data;
-            console.log(this.archivedTodos);
           },
           error: (err) => {
             console.log(err)
@@ -42,17 +41,11 @@ export class ArchiveComponent implements OnInit {
       );
   }
 
-  deleteTodo(event: IFinishedTodo) {
-    this.archiveService.deleteTodo(event)
-    .pipe(
-      map(response => response.message)
+  deleteTodo({ id } : IFinishedTodo) {
+    this.archiveService.deleteTodo(id)
+    .subscribe(
+      () => this.fetchTodos()
     )
-    .subscribe({
-      next: result => {
-        console.log(result);
-        this.fetchTodos();
-      }
-    })
   }
 
   ngOnInit() {
